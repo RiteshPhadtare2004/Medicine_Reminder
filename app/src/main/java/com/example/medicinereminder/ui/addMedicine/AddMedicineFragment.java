@@ -1,11 +1,10 @@
 package com.example.medicinereminder.ui.addMedicine;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +18,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.medicinereminder.AlarmReceiver;
 import com.example.medicinereminder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -177,27 +172,25 @@ public class AddMedicineFragment extends Fragment {
 
 
     private void setAlarms(Context context) {
-        setAlarm(context, morningTimeHour, morningTimeMinute, "MorningAlarm");
-        setAlarm(context, noonTimeHour, noonTimeMinute, "Noon Alarm");
-        setAlarm(context, eveningTimeHour, eveningTimeMinute, "Evening Alarm");
+        setAlarm(morningTimeHour, morningTimeMinute, "MorningAlarm");
+        setAlarm(noonTimeHour, noonTimeMinute, "Noon Alarm");
+        setAlarm(eveningTimeHour, eveningTimeMinute, "Evening Alarm");
     }
 
-    public void setAlarm(Context context, int hour, int minute, String alarmName) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    public void setAlarm(int hour, int minute, String alarmName) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
 
-        Calendar alarmTime = Calendar.getInstance();
-        alarmTime.set(Calendar.HOUR_OF_DAY, hour);
-        alarmTime.set(Calendar.MINUTE, minute);
-        alarmTime.set(Calendar.SECOND, 0);
+        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Alarm message");
+        intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
 
-        if (alarmTime.before(Calendar.getInstance())) {
-            alarmTime.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-        if (alarmManager != null) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+        if (getActivity() != null && intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 
