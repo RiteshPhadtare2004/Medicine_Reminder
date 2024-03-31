@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addMedicine.AddMedicineFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PATIENT'S DETAILS"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="35dp"/>
+
+                <!-- Layout for Name -->
+                <LinearLayout
+                    android:id="@+id/ll_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="Name: " />
+
+                    <EditText
+                        android:id="@+id/edit_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter your full name"
+                        android:layout_marginLeft="100dp"/>
+                </LinearLayout>
+
+                <!-- Layout for Medicine Count -->
+                <LinearLayout
+                    android:id="@+id/ll_med_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_name"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/med_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Medicine Count"
+                        android:layout_marginStart="20dp"/>
+
+                    <EditText
+                        android:id="@+id/edit_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter total Medicine"
+                        android:layout_marginLeft="10dp"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_med_count"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="35dp"
+                    android:text="MEDICATION SCHEDULE" />
+
+                <!-- Medication Schedule Layout -->
+                <LinearLayout
+                    android:id="@+id/Linear_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/schedule"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- Schedule details -->
+                    <TextView
+                        android:id="@+id/morning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="Morning" />
+
+                    <TextView
+                        android:id="@+id/noon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="Noon" />
+
+                    <TextView
+                        android:id="@+id/evening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="Evening" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/caregiver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CAREGIVER'S DETAILS"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="35dp"
+                    android:layout_below="@+id/Linear_schedule"/>
+
+
+                <TextView
+                    android:id="@+id/caregiver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name: "
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@+id/caregiver" />
+
+                <EditText
+                    android:id="@+id/edit_caregiver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Caregiver's Name"
+                    android:layout_marginLeft="100dp"
+                    android:layout_below="@+id/caregiver"
+                    android:layout_toRightOf="@id/caregiver_name" />
+
+                <TextView
+                    android:id="@+id/caregiver_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Number"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@+id/caregiver_name" />
+
+                <EditText
+                    android:id="@+id/edit_caregiver_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Number"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_below="@+id/caregiver_name"
+                    android:layout_toRightOf="@id/caregiver_no"/>
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/caregiver_no"
+                    android:layout_marginTop="39dp"
+                    android:layout_marginStart="100dp"
+                    android:text="SUBMIT" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
