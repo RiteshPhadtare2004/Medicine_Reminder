@@ -84,19 +84,19 @@ public class AddMedicineFragment extends Fragment {
     }
 
     private void submitUserData() {
-        String name = editName.getText().toString().trim();
+        String medicineName = editName.getText().toString().trim();
         String count = editCount.getText().toString().trim();
         String caregiverName = editCaregiverName.getText().toString().trim();
         String caregiverNumber = editCaregiverNumber.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(count) ||
+        if (TextUtils.isEmpty(medicineName) || TextUtils.isEmpty(count) ||
                 TextUtils.isEmpty(caregiverName) || TextUtils.isEmpty(caregiverNumber)) {
             Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Map<String, Object> userData = new HashMap<>();
-        userData.put("name", name);
+        userData.put("Medicine Name", medicineName);
         userData.put("count", count);
         userData.put("morningTime", morningTimeHour+":"+morningTimeMinute);
         userData.put("noonTime", noonTimeHour+":"+noonTimeMinute);
@@ -106,7 +106,7 @@ public class AddMedicineFragment extends Fragment {
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
-            mDatabase.child("userMedicineData").child(userId).setValue(userData)
+            mDatabase.child("userMedicineData").child(userId).child(medicineName).setValue(userData)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Data submitted successfully", Toast.LENGTH_SHORT).show();
@@ -186,7 +186,7 @@ public class AddMedicineFragment extends Fragment {
         Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
         intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
         intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Alarm message");
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, alarmName);
         intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
 
         if (getActivity() != null && intent.resolveActivity(getActivity().getPackageManager()) != null) {

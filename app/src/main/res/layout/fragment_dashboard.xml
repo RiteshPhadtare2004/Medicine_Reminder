@@ -131,7 +131,7 @@
                     android:id="@+id/caregiver_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name: "
+                    android:text="CAREGIVER Name: "
                     android:layout_marginStart="20dp"
                     android:layout_below="@+id/caregiver" />
 
@@ -139,8 +139,8 @@
                     android:id="@+id/edit_caregiver_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Caregiver's Name"
-                    android:layout_marginLeft="100dp"
+                    android:hint="Enter name"
+                    android:layout_marginLeft="20dp"
                     android:layout_below="@+id/caregiver"
                     android:layout_toRightOf="@id/caregiver_name" />
 
